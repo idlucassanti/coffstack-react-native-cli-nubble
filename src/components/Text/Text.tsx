@@ -1,7 +1,17 @@
-import { Text as RNText, TextProps, TextStyle } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle } from 'react-native';
 
-export function Text({children, ...rest}: TextProps){
-    return (<RNText style={fontSizes.headingLarge} {...rest}>{children}</RNText>);
+interface TextProps extends RNTextProps {
+    preset?: TextVariants;
+}
+
+export function Text({children, preset = 'paragraphMedium', style, ...rest}: TextProps){
+    return (
+        <RNText 
+            style={[$fontSizes[preset], style]} 
+            {...rest}
+        >
+            {children}
+        </RNText>);
 }
 
 // variações de texto
@@ -15,12 +25,7 @@ type TextVariants =
     | 'paragraphCaption'
     | 'paragraphCaptionSmall';
 
-type FontSizeType = {
-    fontSize: number;
-    lineHeight: number;
-}
-
-const fontSizes: Record<TextVariants, TextStyle> = {
+const $fontSizes: Record<TextVariants, TextStyle> = {
     headingLarge: { fontSize: 32, lineHeight: 38 },
     headingMedium: { fontSize: 22, lineHeight: 26 },
     headingSmall: { fontSize: 18, lineHeight: 23 },

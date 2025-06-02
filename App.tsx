@@ -6,7 +6,7 @@ function App(): React.JSX.Element {
 
   return (
     <View>
-      <Text style={{ color: 'red', fontSize: 32, fontWeight: 700 }}>Hello World!</Text>
+      <Text preset='headingLarge' style={{ color: 'red' }}>Hello World!</Text>
     </View>
   );
 }
